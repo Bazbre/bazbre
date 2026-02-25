@@ -242,3 +242,11 @@ body {
 .whatsapp-fixo:hover {
   transform: scale(1.1);
 }
+
+.preco{
+  display:block;
+  font-size:1.1em;
+  color:blue;
+  margin-bottom:8px;
+  font-weight:bold;
+}

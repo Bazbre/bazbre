@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<script>
-const nomeLoja = "Luiza Bazar";
-</script>
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luiza Bazar</title>
 <link rel="stylesheet" href="luizabazar.css">
 </head>
-<body>
+<script> const nomeLoja = "Luiza Bazar"; </script>
 
+
+
+<body>
 <header class="header">
   <div class="header-container">
-   <div class="logo">
-  BazBre 🛒 <span id="contadorCarrinho">0</span>
-</div>
+    <div class="logo">BazBre</div>
+
     <nav class="menu">
-      <a href="lojas.html" class="link1">Lojas</a>
-      <a href="lojas.html" class="link1">Promoções</a>
-      <a href="#contato" class="link1">Contato</a>
-      <a href="#contato" class="link1">Sobre</a>
+      <a href="index.html" class="link1">Inicio</a>
+	  <a href="lojas.html" class="link1">Lojas</a>
+      <a href="#" class="link1">Promoções</a>
+      <a href="#" class="link1">Contato</a>
+      <a href="#" class="link1">Sobre</a>
     </nav>
   </div>
 </header>
@@ -36,7 +35,7 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/vestidov.jpg"></div>
       <div class="info">
         <h2>Vestido Floral</h2>
-        <p>Estilo anos 60, tecido leve e estampado. Tamanho M.</p>
+        <p class="preco">R$120,00</p>
         <button onclick="adicionarProduto('Vestido Floral', 120)">🛒 Adicionar</button>
       </div>
     </div>
@@ -45,7 +44,7 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/bolsac.jpg"></div>
       <div class="info">
         <h2>Bolsa de Couro</h2>
-        <p>Couro sintético marrom, alça ajustável.</p>
+        <p class="preco">R$200,00</p>
         <button onclick="adicionarProduto('Bolsa de Couro', 200)">🛒 Adicionar</button>
       </div>
     </div>
@@ -54,7 +53,7 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/calcav.jpg"></div>
       <div class="info">
         <h2>Calça Vintage</h2>
-        <p>Cintura alta e modelagem clássica.</p>
+        <p class="preco">R$150,00</p>
         <button onclick="adicionarProduto('Calça Vintage', 150)">🛒 Adicionar</button>
       </div>
     </div>
@@ -63,7 +62,7 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/camisapoa.jpg"></div>
       <div class="info">
         <h2>Camisa Poá</h2>
-        <p>Camisa branca com bolinhas pretas.</p>
+        <p class="preco">R$90,00</p>
         <button onclick="adicionarProduto('Camisa Poá', 90)">🛒 Adicionar</button>
       </div>
     </div>
@@ -72,7 +71,7 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/jaqueta80.jpg"></div>
       <div class="info">
         <h2>Jaqueta anos 80</h2>
-        <p>Peça icônica com estilo retrô.</p>
+        <p class="preco">R$250,00</p>
         <button onclick="adicionarProduto('Jaqueta anos 80', 250)">🛒 Adicionar</button>
       </div>
     </div>
@@ -81,8 +80,8 @@ const nomeLoja = "Luiza Bazar";
       <div class="imagem"><img src="imagens/saiasp.jpg"></div>
       <div class="info">
         <h2>Saia Pequena</h2>
-        <p>Saia leve e estilosa.</p>
-        <button onclick="adicionarProduto('Saia Pequena', 80)">🛒 Adicionar</button>
+        <p class="preco">R$35,00</p>
+        <button onclick="adicionarProduto('Saia Pequena', 35)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -104,27 +103,16 @@ const nomeLoja = "Luiza Bazar";
 </footer>
 
 <script>
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-function salvarCarrinho() {
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  atualizarContador();
-}
-
-function atualizarContador() {
-  document.getElementById("contadorCarrinho").innerText = carrinho.length;
-}
+let carrinho = [];
 
 function adicionarProduto(nome, preco) {
   carrinho.push({ nome, preco });
   mostrarCarrinho();
-  salvarCarrinho();
 }
 
 function removerItem(index) {
   carrinho.splice(index, 1);
   mostrarCarrinho();
-  salvarCarrinho();
 }
 
 function mostrarCarrinho() {
@@ -145,69 +133,18 @@ function mostrarCarrinho() {
   });
 
   total.innerHTML = "<strong>Total: R$" + soma + "</strong>";
-  atualizarContador();
 }
-
-function comprar() {
-  if (carrinho.length === 0) {
-    alert("Seu carrinho está vazio!");
-    return;
-  }
-
-  let mensagem = "Olá, quero finalizar este pedido:%0A%0A";
-  let total = 0;
-
-  carrinho.forEach(item => {
-    mensagem += `${item.nome} - R$${item.preco}%0A`;
-    total += item.preco;
-  });
-
-  mensagem += `%0A💰 Total: R$${total}`;
-
-  let telefone = "5541998177448";
-  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
-
-  carrinho = [];
-  salvarCarrinho();
-  mostrarCarrinho();
-}
-
-/* CARREGA O CARRINHO SALVO AO ABRIR A PÁGINA */
-mostrarCarrinho();
-</script>
-<script>
-const numeroWhatsApp = "5541998177448";
-
-document.querySelectorAll(".comprar").forEach(botao => {
-  botao.addEventListener("click", () => {
-
-    const nome = botao.dataset.nome;
-    const preco = botao.dataset.preco;
-    const loja = botao.dataset.loja || nomeLoja;
-
-    const mensagem =
-`🛒 *Pedido - ${loja}*
-Produto: ${nome}
-Valor: R$ ${preco}`;
-
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
-    window.open(url, "_blank");
-
-    /* REMOVE PRODUTO DA VITRINE */
-    const card = botao.closest(".produto");
-    if (card) {
-      card.remove();
-    }
-  });
-});
+function comprar() { 
+if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); 
+return; } 
+let mensagem = `🛍️ Loja: ${nomeLoja}%0A%0AOlá, quero finalizar este pedido:%0A%0A`; 
+let total = 0; carrinho.forEach(item => { mensagem += `${item.nome} - R$${item.preco}%0A`; 
+total += item.preco; }); mensagem += `%0A💰 Total: R$${total}`; 
+let telefone = "5541998177448"; window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank"); 
+carrinho = []; mostrarCarrinho(); }
 </script>
 
 
 
-
-<a href="https://wa.me/5541998177448" class="whatsapp-fixo" target="_blank">
-  💬
-</a>
 </body>
 </html>
