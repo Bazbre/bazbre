@@ -1,0 +1,171 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+.header {
+  background-color: #d8b6a4;
+  padding: 30px 20px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 2.2em;
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  color: #5a3e36;
+}
+
+.menu {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.link1 {
+  color: #5a3e36;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* LAYOUT PRINCIPAL */
+.main-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+}
+
+/* PRODUTOS */
+.container {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+/* CARD PRODUTO */
+.produto {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.imagem img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+}
+
+.info {
+  padding: 15px;
+  text-align: center;
+}
+
+.info h2 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #5a3e36;
+}
+
+.info p {
+  font-size: 0.9em;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.info button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5a3e36;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* CARRINHO */
+#carrinho {
+  flex: 1;
+  background: #fff8f5;
+  border: 2px solid #d8b6a4;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#carrinho h3 {
+  text-align: center;
+  color: #5a3e36;
+}
+
+/* ITEM DO CARRINHO */
+.item-carrinho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fdf2ec;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.item-carrinho button {
+  background: #c94f4f;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* TOTAL */
+#total {
+  text-align: center;
+  font-size: 1.1em;
+  margin-top: 15px;
+  color: #5a3e36;
+}
+
+/* BOTÃO COMPRAR */
+#comprarBtn {
+  display: block;
+  margin: 15px auto 0 auto;
+  padding: 12px 20px;
+  background: #5a3e36;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* FOOTER ABAIXO DAS DIVS */
+.footer {
+  background-color: #f0e0d6;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 1em;
+  color: #5a3e36;
+  border-top: 2px solid #d8b6a4;
+}
