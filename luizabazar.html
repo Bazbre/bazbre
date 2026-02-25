@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<script>
+const nomeLoja = "Luiza Bazar";
+</script>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,6 +175,37 @@ function comprar() {
 /* CARREGA O CARRINHO SALVO AO ABRIR A PÁGINA */
 mostrarCarrinho();
 </script>
+<script>
+const numeroWhatsApp = "5541998177448";
+
+document.querySelectorAll(".comprar").forEach(botao => {
+  botao.addEventListener("click", () => {
+
+    const nome = botao.dataset.nome;
+    const preco = botao.dataset.preco;
+    const loja = botao.dataset.loja || nomeLoja;
+
+    const mensagem =
+`🛒 *Pedido - ${loja}*
+Produto: ${nome}
+Valor: R$ ${preco}`;
+
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+
+    /* REMOVE PRODUTO DA VITRINE */
+    const card = botao.closest(".produto");
+    if (card) {
+      card.remove();
+    }
+  });
+});
+</script>
+
+
+
+
 <a href="https://wa.me/5541998177448" class="whatsapp-fixo" target="_blank">
   💬
 </a>
