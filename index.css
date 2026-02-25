@@ -9,59 +9,63 @@
 body {
   font-family: Arial, sans-serif;
   background: #fff;
+  padding-bottom: 80px; /* espaço para footer fixo */
 }
 
 /* HEADER */
 .header {
   background-color: #d8b6a4;
-  padding: 20px;
+  padding: 15px 10px;
 }
 
 .header-container {
   max-width: 1200px;
   margin: auto;
   display: flex;
+  flex-direction: column; /* mobile primeiro */
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .logo {
-  font-size: 2em;
-  letter-spacing: 4px;
+  font-size: 1.6em;
+  letter-spacing: 3px;
   color: #5a3e36;
+  text-align: center;
 }
 
 .menu {
   display: flex;
-  gap: 15px;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .link1 {
   color: #5a3e36;
   text-decoration: none;
   font-weight: bold;
+  font-size: 0.95em;
 }
 
 /* DESTAQUES */
 #destaques {
   text-align: center;
-  padding: 30px 15px;
+  padding: 25px 10px;
 }
 
 .section-title {
-  font-size: 1.6em;
+  font-size: 1.3em;
   color: #5a3e36;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* CARROSSEL */
 .carrossel {
   position: relative;
-  width: 90%;
+  width: 95%;
   max-width: 700px;
-  height: 420px;
+  aspect-ratio: 16 / 10; /* mantém proporção automática */
   margin: auto;
   border: 2px solid #5a3e36;
   border-radius: 12px;
@@ -95,29 +99,29 @@ body {
   background: rgba(90,62,54,0.7);
   color: #fff;
   border: none;
-  font-size: 26px;
-  padding: 6px 12px;
+  font-size: 20px;
+  padding: 4px 8px;
   cursor: pointer;
   border-radius: 6px;
   z-index: 2;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev { left: 8px; }
+.next { right: 8px; }
 
 /* BOLINHAS */
 .bolinhas {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   width: 100%;
   text-align: center;
 }
 
 .bolinha {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
+  width: 9px;
+  height: 9px;
+  margin: 0 4px;
   background: #d8b6a4;
   border-radius: 50%;
   cursor: pointer;
@@ -132,7 +136,7 @@ body {
   background-color: #f0e0d6;
   padding: 10px;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.85em;
   color: #5a3e36;
   border-top: 2px solid #d8b6a4;
   position: fixed;
@@ -141,40 +145,48 @@ body {
   width: 100%;
 }
 
-/* ESPAÇO PARA NÃO COBRIR CONTEÚDO */
-.espaco-footer {
-  height: 70px;
-}
-
-/* RESPONSIVO TABLET */
-@media (max-width: 768px) {
-  .carrossel {
-    height: 300px;
+/* ===== TABLET ===== */
+@media (min-width: 600px) {
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .logo {
-    font-size: 1.6em;
+    font-size: 1.8em;
+    text-align: left;
   }
 
   .menu {
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-/* RESPONSIVO CELULAR */
-@media (max-width: 480px) {
-  .carrossel {
-    height: 220px;
-  }
-
-  .btn {
-    font-size: 20px;
-    padding: 4px 8px;
+    justify-content: flex-end;
   }
 
   .section-title {
-    font-size: 1.3em;
+    font-size: 1.5em;
+  }
+
+  .btn {
+    font-size: 22px;
+    padding: 6px 10px;
+  }
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 1024px) {
+  .logo {
+    font-size: 2em;
+  }
+
+  .section-title {
+    font-size: 1.7em;
+  }
+
+  .carrossel {
+    max-width: 750px;
+  }
+
+  .btn {
+    font-size: 26px;
+    padding: 6px 12px;
   }
 }
