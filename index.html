@@ -1,10 +1,64 @@
-<!DOCTYPE html> 
-<html lang="pt-br"> 
-<head> 
-<meta charset="UTF-8">
- <title>Baz-Bre</title> 
- <link rel="stylesheet" href="index.css"> 
- </head> 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Baz-Bre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo">BazBre</div>
+
+    <nav class="menu">
+      <a href="lojas.html" class="link1">Lojas</a>
+      <a href="lojas.html" class="link1">Promoções</a>
+      <a href="#contato" class="link1">Contato</a>
+      <a href="#contato" class="link1">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<!-- DESTAQUES -->
+<section id="destaques">
+  <h2 class="section-title">✨ Destaques</h2>
+
+  <div class="carrossel">
+
+    <button class="btn prev">&#10094;</button>
+
+    <div class="slides">
+      <img src="imagens/bolsac.jpg" class="slide ativo">
+      <img src="imagens/jaqueta80.jpg" class="slide">
+      <img src="imagens/saias.jpg" class="slide">
+      <img src="imagens/vestidov.jpg" class="slide">
+    </div>
+
+    <button class="btn next">&#10095;</button>
+
+    <div class="bolinhas"></div>
+  </div>
+</section>
+
+<!-- ESPAÇO PARA NÃO COBRIR PELO FOOTER -->
+<div class="espaco-footer"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <em>Quer cadastrar seu bazar ou brechó? Fale conosco!</em>
+  </div>
+  <div>
+    <strong>📞</strong> (41) 99817-7448 |
+    <strong>📧</strong> basbrevitrines@gmail.com
+  </div>
+</footer>
+
+<!-- SCRIPT CARROSSEL -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -13,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnNext = document.querySelector(".next");
   const btnPrev = document.querySelector(".prev");
   const bolinhasContainer = document.querySelector(".bolinhas");
+  const carrossel = document.querySelector(".carrossel");
 
   let autoplay;
 
@@ -26,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     index = i;
   }
 
-  /* CRIAR BOLINHAS */
+  // Criar bolinhas
   slides.forEach((_, i) => {
     const bolinha = document.createElement("span");
     bolinha.classList.add("bolinha");
@@ -50,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
     resetAutoplay();
   });
 
-  /* AUTOPLAY LENTO */
   function iniciarAutoplay() {
     autoplay = setInterval(() => {
       mostrarSlide((index + 1) % slides.length);
@@ -62,70 +116,12 @@ document.addEventListener("DOMContentLoaded", function () {
     iniciarAutoplay();
   }
 
-  /* PAUSAR NO HOVER */
-  const carrossel = document.querySelector(".carrossel");
-
   carrossel.addEventListener("mouseenter", () => clearInterval(autoplay));
   carrossel.addEventListener("mouseleave", iniciarAutoplay);
 
   iniciarAutoplay();
-
 });
 </script>
- 
- 
- 
- <body> 
- <!-- HEADER -->
- <header class="header"> 
- <div class="header-container"> 
- <div class="logo">BazBre</div> 
- <nav class="menu">
- <a href="lojas.html" class="link1">Lojas</a>
- <a href="lojas.html" class="link1">Promoções</a>
- <a href="#contato" class="link1">Contato</a>
- <a href="#contato" class="link1">Sobre</a> 
- </nav>
- </div> </header>
- <!-- DESTAQUES -->
-<section id="destaques">
-  <h2 class="section-title">✨ Destaques</h2>
-<div class="carrossel">
 
-  <button class="btn prev">&#10094;</button>
-
-  <div class="slides">
-    <img src="imagens/bolsac.jpg" class="slide ativo">
-    <img src="imagens/jaqueta80.jpg" class="slide">
-    <img src="imagens/saias.jpg" class="slide">
-    <img src="imagens/vestidov.jpg" class="slide">
-  </div>
-
-  <button class="btn next">&#10095;</button>
-
-  <div class="bolinhas"></div>
-
-</div>
-</section>
-
- <!-- FOOTER -->
- <footer class="footer"> 
- <div>
- <em>Quer cadastrar seu bazar ou brechó? Fale conosco!</em>
- </div> <div> <strong>📞</strong> (41) 99817-7448 | <strong>📧</strong> basbrevitrines@gmail.com </div> </footer> 
- <!-- SCRIPT CARROSSEL -->
- <script> 
- document.addEventListener("DOMContentLoaded", 
- function () { 
- const imagens = document.querySelectorAll('.carrossel img'); let index = 0; 
- function mostrarImagem(i) { imagens.forEach((img, idx) => { img.classList.toggle('active', idx === i); }); } 
- function iniciarCarrossel() { mostrarImagem(index); setInterval(() => { index = (index + 1) % imagens.length; mostrarImagem(index); }, 3000); } iniciarCarrossel(); }); 
- </script> 
- <!-- SCRIPT BUSCA --> 
- <script> 
- function buscar(event) { event.preventDefault(); 
-
-const valor = document.getElementById("campoBusca").value; alert("Você buscou por: " + valor); } 
-</script> 
 </body>
- </html>
+</html>
