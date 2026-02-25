@@ -27,7 +27,7 @@ body {
   max-width: 1200px;
   margin: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* mobile primeiro */
   align-items: center;
   gap: 10px;
 }
@@ -36,6 +36,7 @@ body {
   font-size: 1.6em;
   letter-spacing: 3px;
   color: #5a3e36;
+  text-align: center;
 }
 
 .menu {
@@ -49,7 +50,7 @@ body {
   color: #5a3e36;
   text-decoration: none;
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
 /* PRODUTOS */
