@@ -10,7 +10,9 @@
 
 <header class="header">
   <div class="header-container">
-    <div class="logo">BazBre</div>
+   <div class="logo">
+  BazBre 🛒 <span id="contadorCarrinho">0</span>
+</div>
     <nav class="menu">
       <a href="lojas.html" class="link1">Lojas</a>
       <a href="lojas.html" class="link1">Promoções</a>
@@ -98,16 +100,27 @@
 </footer>
 
 <script>
-let carrinho = [];
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+function salvarCarrinho() {
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  atualizarContador();
+}
+
+function atualizarContador() {
+  document.getElementById("contadorCarrinho").innerText = carrinho.length;
+}
 
 function adicionarProduto(nome, preco) {
   carrinho.push({ nome, preco });
   mostrarCarrinho();
+  salvarCarrinho();
 }
 
 function removerItem(index) {
   carrinho.splice(index, 1);
   mostrarCarrinho();
+  salvarCarrinho();
 }
 
 function mostrarCarrinho() {
@@ -128,6 +141,7 @@ function mostrarCarrinho() {
   });
 
   total.innerHTML = "<strong>Total: R$" + soma + "</strong>";
+  atualizarContador();
 }
 
 function comprar() {
@@ -150,9 +164,15 @@ function comprar() {
   window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
 
   carrinho = [];
+  salvarCarrinho();
   mostrarCarrinho();
 }
-</script>
 
+/* CARREGA O CARRINHO SALVO AO ABRIR A PÁGINA */
+mostrarCarrinho();
+</script>
+<a href="https://wa.me/5541998177448" class="whatsapp-fixo" target="_blank">
+  💬
+</a>
 </body>
 </html>
