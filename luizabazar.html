@@ -4,20 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luiza Bazar</title>
-<link rel="stylesheet" href="luizabazar.css">
+
+<link rel="stylesheet" href="luizabazar.css?v=4">
+
 </head>
 <body>
 
 <header class="header">
   <div class="header-container">
-   <div class="logo">
-  BazBre 🛒 <span id="contadorCarrinho">0</span>
-</div>
+    <div class="logo">
+      BazBre 🛒 <span id="contadorCarrinho">0</span>
+    </div>
+
     <nav class="menu">
-      <a href="lojas.html" class="link1">Lojas</a>
-      <a href="lojas.html" class="link1">Promoções</a>
-      <a href="#contato" class="link1">Contato</a>
-      <a href="#contato" class="link1">Sobre</a>
+      <a href="lojas.html">Lojas</a>
+      <a href="lojas.html">Promoções</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato">Sobre</a>
     </nav>
   </div>
 </header>
@@ -27,13 +30,12 @@
   <!-- PRODUTOS -->
   <div class="container">
 
-    <!-- PRODUTO -->
     <div class="produto">
       <div class="imagem"><img src="imagens/vestidov.jpg"></div>
       <div class="info">
         <h2>Vestido Floral</h2>
         <p>Estilo anos 60, tecido leve e estampado. Tamanho M.</p>
-        <button onclick="adicionarProduto('Vestido Floral', 120)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(1,'Vestido Floral',120)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -42,7 +44,7 @@
       <div class="info">
         <h2>Bolsa de Couro</h2>
         <p>Couro sintético marrom, alça ajustável.</p>
-        <button onclick="adicionarProduto('Bolsa de Couro', 200)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(2,'Bolsa de Couro',200)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -51,7 +53,7 @@
       <div class="info">
         <h2>Calça Vintage</h2>
         <p>Cintura alta e modelagem clássica.</p>
-        <button onclick="adicionarProduto('Calça Vintage', 150)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(3,'Calça Vintage',150)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -60,7 +62,7 @@
       <div class="info">
         <h2>Camisa Poá</h2>
         <p>Camisa branca com bolinhas pretas.</p>
-        <button onclick="adicionarProduto('Camisa Poá', 90)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(4,'Camisa Poá',90)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -69,7 +71,7 @@
       <div class="info">
         <h2>Jaqueta anos 80</h2>
         <p>Peça icônica com estilo retrô.</p>
-        <button onclick="adicionarProduto('Jaqueta anos 80', 250)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(5,'Jaqueta anos 80',250)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -78,7 +80,7 @@
       <div class="info">
         <h2>Saia Pequena</h2>
         <p>Saia leve e estilosa.</p>
-        <button onclick="adicionarProduto('Saia Pequena', 80)">🛒 Adicionar</button>
+        <button onclick="adicionarProduto(6,'Saia Pequena',80)">🛒 Adicionar</button>
       </div>
     </div>
 
@@ -99,20 +101,30 @@
   <div><strong>📞</strong> (41) 99817-7448 | <strong>📧</strong> basbrevitrines@gmail.com</div>
 </footer>
 
+<!-- BOTÃO WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5541998177448" class="whatsapp-fixo" target="_blank">💬</a>
+
 <script>
+const nomeLoja = "Luiza Bazar";
+
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let produtosVendidos = JSON.parse(localStorage.getItem("vendidos")) || [];
 
 function salvarCarrinho() {
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   atualizarContador();
 }
 
+function salvarVendidos() {
+  localStorage.setItem("vendidos", JSON.stringify(produtosVendidos));
+}
+
 function atualizarContador() {
   document.getElementById("contadorCarrinho").innerText = carrinho.length;
 }
 
-function adicionarProduto(nome, preco) {
-  carrinho.push({ nome, preco });
+function adicionarProduto(id, nome, preco) {
+  carrinho.push({ id, nome, preco });
   mostrarCarrinho();
   salvarCarrinho();
 }
@@ -144,35 +156,48 @@ function mostrarCarrinho() {
   atualizarContador();
 }
 
+function removerProdutosVendidosDaVitrine() {
+  produtosVendidos.forEach(id => {
+    const botao = document.querySelector(`button[onclick^="adicionarProduto(${id},"]`);
+    if (botao) {
+      botao.closest(".produto").remove();
+    }
+  });
+}
+
 function comprar() {
   if (carrinho.length === 0) {
     alert("Seu carrinho está vazio!");
     return;
   }
 
-  let mensagem = "Olá, quero finalizar este pedido:%0A%0A";
+  let mensagem = `Olá, quero finalizar este pedido da loja ${nomeLoja}:%0A%0A`;
   let total = 0;
 
   carrinho.forEach(item => {
     mensagem += `${item.nome} - R$${item.preco}%0A`;
     total += item.preco;
+    produtosVendidos.push(item.id);
   });
 
   mensagem += `%0A💰 Total: R$${total}`;
 
   let telefone = "5541998177448";
-  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank`);
+
+  salvarVendidos();
 
   carrinho = [];
   salvarCarrinho();
   mostrarCarrinho();
+
+  removerProdutosVendidosDaVitrine();
 }
 
-/* CARREGA O CARRINHO SALVO AO ABRIR A PÁGINA */
+/* AO ABRIR A PÁGINA */
 mostrarCarrinho();
+removerProdutosVendidosDaVitrine();
 </script>
-<a href="https://wa.me/5541998177448" class="whatsapp-fixo" target="_blank">
-  💬
-</a>
+
 </body>
 </html>
