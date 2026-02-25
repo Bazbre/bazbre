@@ -48,9 +48,13 @@ body {
 
 .link1 {
   color: #5a3e36;
-  text-decoration: none;
+  text-decoration: none; /* remove o underline */
   font-weight: bold;
-  font-size: 0.95em;
+  font-size: 0.9em;
+}
+
+.link1:hover {
+  text-decoration: underline; /* opcional: só aparece quando passa o mouse */
 }
 
 /* PRODUTOS */
