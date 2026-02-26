@@ -1,252 +1,231 @@
-/* RESET */
+/* Reset básico e tipografia */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
 }
 
-/* CENTRALIZA O SITE NO PC */
+/* Layout Principal */
 .main-layout {
-  max-width: 1200px;
-  margin: auto;
-  padding: 15px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
 }
 
-/* HEADER */
+/* Cabeçalho */
 .header {
-  background-color: #d8b6a4;
-  padding: 15px 10px;
+    background-color: #d8b6a4;
+    padding: 15px 10px;
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  flex-direction: column; /* mobile primeiro */
-  align-items: center;
-  gap: 10px;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .logo {
-  font-size: 1.6em;
-  letter-spacing: 3px;
-  color: #5a3e36;
-  text-align: center;
+    font-size: 1.8em;
+    letter-spacing: 3px;
+    color: #5a3e36;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
 }
 
 .menu a {
-  color: #5a3e36;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.9em;
-}
-
-.menu a:visited {
-  color: #5a3e36;
+    color: #5a3e36;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: 0.3s;
 }
 
 .menu a:hover {
-  text-decoration: underline;
+    color: #8d6255;
+    text-decoration: underline;
 }
 
-.link1 {
-  color: #5a3e36;
-  text-decoration: none; /* remove o underline */
-  font-weight: bold;
-  font-size: 0.9em;
-}
-
-.link1:hover {
-  text-decoration: underline; /* opcional: só aparece quando passa o mouse */
-}
-
-/* PRODUTOS */
+/* Grid de Produtos */
 .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
-/* CARD */
 .produto {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
 }
 
 .imagem img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Melhor para roupas */
 }
 
 .info {
-  padding: 12px;
-  text-align: center;
+    padding: 15px;
+    text-align: center;
 }
 
 .info h2 {
-  font-size: 1.05em;
-  margin-bottom: 6px;
-  color: #5a3e36;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #5a3e36;
 }
 
-.info p {
-  font-size: 0.85em;
-  margin-bottom: 10px;
+.preco {
+    display: block;
+    font-size: 1.2em;
+    color: #2a5298; /* Um azul mais elegante que o padrão */
+    margin-bottom: 12px;
+    font-weight: bold;
 }
 
 .info button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #5a3e36;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #5a3e36;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* CARRINHO */
+.info button:hover {
+    background: #7a544a;
+}
+
+/* Carrinho */
 #carrinho {
-  margin-top: 20px;
-  background: #fff8f5;
-  border: 2px solid #d8b6a4;
-  border-radius: 12px;
-  padding: 15px;
+    margin-top: 30px;
+    background: #fff8f5;
+    border: 2px solid #d8b6a4;
+    border-radius: 12px;
+    padding: 20px;
 }
 
 #carrinho h3 {
-  text-align: center;
-  color: #5a3e36;
-  margin-bottom: 10px;
+    text-align: center;
+    color: #5a3e36;
+    margin-bottom: 15px;
 }
 
 .item-carrinho {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fdf2ec;
-  padding: 8px 10px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  font-size: 0.85em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    border-left: 4px solid #d8b6a4;
 }
 
 .item-carrinho button {
-  background: #c94f4f;
-  border: none;
-  color: #fff;
-  padding: 5px 8px;
-  border-radius: 6px;
-  cursor: pointer;
+    background: #c94f4f;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 #total {
-  text-align: center;
-  font-size: 1.05em;
-  margin-top: 10px;
-  color: #5a3e36;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: #5a3e36;
+    border-top: 1px dashed #d8b6a4;
+    padding-top: 10px;
 }
 
-#comprarBtn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: #5a3e36;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+/* Botões de Ação */
+#comprarBtn, #verMaisBtn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    background: #28a745; /* Verde para 'Comprar' */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* FOOTER */
+#verMaisBtn {
+    background: #5a3e36;
+}
+
+/* Rodapé */
 .footer {
-  background-color: #f0e0d6;
-  padding: 12px 10px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #5a3e36;
-  border-top: 2px solid #d8b6a4;
-  margin-top: 30px;
+    background-color: #f0e0d6;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #5a3e36;
+    margin-top: 40px;
 }
 
-/* ===== TABLET / DESKTOP ===== */
+/* Responsividade */
 @media (min-width: 768px) {
-
-  .header-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .logo {
-    font-size: 1.9em;
-  }
-
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+    .header-container { flex-direction: row; justify-content: space-between; }
+    .container { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ===== DESKTOP GRANDE ===== */
 @media (min-width: 1024px) {
-
-  .main-layout {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 20px;
-  }
-
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  #carrinho {
-    margin-top: 0;
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-  }
-
+    .main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 30px; }
+    .container { grid-template-columns: repeat(3, 1fr); }
+    #carrinho { margin-top: 0; height: fit-content; position: sticky; top: 20px; }
 }
-/* WHATSAPP FLUTUANTE */
+
+/* WhatsApp Flutuante */
 .whatsapp-fixo {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  width: 60px;
-  height: 60px;
-  background: #25d366;
-  color: #fff;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-  z-index: 9999; /* fica na frente de tudo */
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.3s;
 }
 
 .whatsapp-fixo:hover {
-  transform: scale(1.1);
-}
-
-.preco{
-  display:block;
-  font-size:1.1em;
-  color:blue;
-  margin-bottom:8px;
-  font-weight:bold;
+    transform: scale(1.1);
 }
