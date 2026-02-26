@@ -6,18 +6,20 @@
 <title>Luiza Bazar</title>
 <link rel="stylesheet" href="luizabazar.css">
 </head>
-<script> const nomeLoja = "Luiza Bazar"; </script>
 
-
+<script>
+const nomeLoja = "Luiza Bazar";
+</script>
 
 <body>
+
 <header class="header">
   <div class="header-container">
     <div class="logo">BazBre</div>
 
     <nav class="menu">
       <a href="index.html" class="link1">Inicio</a>
-	  <a href="lojas.html" class="link1">Lojas</a>
+      <a href="lojas.html" class="link1">Lojas</a>
       <a href="#" class="link1">Promoções</a>
       <a href="#" class="link1">Contato</a>
       <a href="#" class="link1">Sobre</a>
@@ -27,65 +29,8 @@
 
 <div class="main-layout">
 
-  <!-- PRODUTOS -->
-  <div class="container">
-
-    <!-- PRODUTO -->
-    <div class="produto">
-      <div class="imagem"><img src="imagens/vestidov.jpg"></div>
-      <div class="info">
-        <h2>Vestido Floral</h2>
-        <p class="preco">R$120,00</p>
-        <button onclick="adicionarProduto('Vestido Floral', 120)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-    <div class="produto">
-      <div class="imagem"><img src="imagens/bolsac.jpg"></div>
-      <div class="info">
-        <h2>Bolsa de Couro</h2>
-        <p class="preco">R$200,00</p>
-        <button onclick="adicionarProduto('Bolsa de Couro', 200)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-    <div class="produto">
-      <div class="imagem"><img src="imagens/calcav.jpg"></div>
-      <div class="info">
-        <h2>Calça Vintage</h2>
-        <p class="preco">R$150,00</p>
-        <button onclick="adicionarProduto('Calça Vintage', 150)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-    <div class="produto">
-      <div class="imagem"><img src="imagens/camisapoa.jpg"></div>
-      <div class="info">
-        <h2>Camisa Poá</h2>
-        <p class="preco">R$90,00</p>
-        <button onclick="adicionarProduto('Camisa Poá', 90)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-    <div class="produto">
-      <div class="imagem"><img src="imagens/jaqueta80.jpg"></div>
-      <div class="info">
-        <h2>Jaqueta anos 80</h2>
-        <p class="preco">R$250,00</p>
-        <button onclick="adicionarProduto('Jaqueta anos 80', 250)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-    <div class="produto">
-      <div class="imagem"><img src="imagens/saiasp.jpg"></div>
-      <div class="info">
-        <h2>Saia Pequena</h2>
-        <p class="preco">R$35,00</p>
-        <button onclick="adicionarProduto('Saia Pequena', 35)">🛒 Adicionar</button>
-      </div>
-    </div>
-
-  </div>
+  <!-- PRODUTOS DINÂMICOS -->
+  <div class="container" id="listaProdutos"></div>
 
   <!-- CARRINHO -->
   <div id="carrinho">
@@ -97,10 +42,8 @@
 
 </div>
 
-
 <!-- Botão flutuante do WhatsApp -->
- <a href="https://wa.me/5541998177448" target="_blank" style="position:fixed; bottom:20px; right:20px; background-color:#25D366; color:white; padding:15px; border-radius:50%; text-decoration:none; font-size:24px;">
- 💬 </a>
+<a href="https://wa.me/5541998177448" target="_blank" class="whatsapp-fixo">💬</a>
 
 <footer class="footer">
   <div><em>Quer cadastrar seu bazar ou brechó? Fale conosco!</em></div>
@@ -110,6 +53,39 @@
 <script>
 let carrinho = [];
 
+/* LISTA DE PRODUTOS */
+const produtos = [
+  { nome: "Vestido Floral", preco: 120, imagem: "imagens/vestidov.jpg" },
+  { nome: "Bolsa de Couro", preco: 200, imagem: "imagens/bolsac.jpg" },
+  { nome: "Calça Vintage", preco: 150, imagem: "imagens/calcav.jpg" },
+  { nome: "Camisa Poá", preco: 90, imagem: "imagens/camisapoa.jpg" },
+  { nome: "Jaqueta anos 80", preco: 250, imagem: "imagens/jaqueta80.jpg" },
+  { nome: "Saia Pequena", preco: 35, imagem: "imagens/saiasp.jpg" }
+];
+
+/* CARREGAR PRODUTOS NA TELA */
+function carregarProdutos() {
+  const container = document.getElementById("listaProdutos");
+
+  produtos.forEach(produto => {
+    container.innerHTML += `
+      <div class="produto">
+        <div class="imagem">
+          <img src="${produto.imagem}">
+        </div>
+        <div class="info">
+          <h2>${produto.nome}</h2>
+          <p class="preco">R$${produto.preco},00</p>
+          <button onclick="adicionarProduto('${produto.nome}', ${produto.preco})">
+            🛒 Adicionar
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* CARRINHO */
 function adicionarProduto(nome, preco) {
   carrinho.push({ nome, preco });
   mostrarCarrinho();
@@ -139,17 +115,34 @@ function mostrarCarrinho() {
 
   total.innerHTML = "<strong>Total: R$" + soma + "</strong>";
 }
-function comprar() { 
-if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); 
-return; } 
-let mensagem = `🛍️ Loja: ${nomeLoja}%0A%0AOlá, quero finalizar este pedido:%0A%0A`; 
-let total = 0; carrinho.forEach(item => { mensagem += `${item.nome} - R$${item.preco}%0A`; 
-total += item.preco; }); mensagem += `%0A💰 Total: R$${total}`; 
-let telefone = "5541998177448"; window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank"); 
-carrinho = []; mostrarCarrinho(); }
+
+/* FINALIZAR COMPRA WHATSAPP */
+function comprar() {
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
+
+  let mensagem = `🛍️ Loja: ${nomeLoja}%0A%0AOlá, quero finalizar este pedido:%0A%0A`;
+  let total = 0;
+
+  carrinho.forEach(item => {
+    mensagem += `${item.nome} - R$${item.preco}%0A`;
+    total += item.preco;
+  });
+
+  mensagem += `%0A💰 Total: R$${total}`;
+
+  let telefone = "5541998177448";
+  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+
+  carrinho = [];
+  mostrarCarrinho();
+}
+
+/* INICIAR */
+carregarProdutos();
 </script>
-
-
 
 </body>
 </html>
