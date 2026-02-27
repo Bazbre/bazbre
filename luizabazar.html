@@ -181,7 +181,11 @@
   mostrarCarrinho();
 
   // 🔽 ABRE O WHATSAPP PARA COBRANÇA
-  const telefone = "5541998177448"; // seu número
+  const telefone = "5541998177448"; 
+  mensagem += `%0A💰 *Total:* R$${total}%0A`;
+  mensagem += `%0A📍 *Endereço:* (digitar aqui)%0A`;
+  mensagem += `💳 *Forma de pagamento:* (Pix/Dinheiro/Cartão)`;
+  // seu número
   window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
 }
 	document.addEventListener("DOMContentLoaded", carregarProdutos);
