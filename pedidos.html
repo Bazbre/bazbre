@@ -24,12 +24,15 @@ function carregarPedidos() {
     return;
   }
 
-  pedidos.reverse().forEach(pedido => {
+  pedidos.reverse().forEach((pedido, index) => {
     let itensHTML = "";
 
     pedido.itens.forEach(item => {
       itensHTML += `<li>${item.nome} - R$${item.preco}</li>`;
     });
+
+    const taxa = pedido.taxaEntrega || 0;
+    const totalComEntrega = Number(pedido.total) + Number(taxa);
 
     container.innerHTML += `
       <div class="pedido">
@@ -40,12 +43,41 @@ function carregarPedidos() {
 
         <ul class="itens">${itensHTML}</ul>
 
-        <div class="pedido-total">
-          💰 Total: R$${pedido.total}
+        <div class="taxa-entrega">
+          🚚 Taxa entrega: R$
+          <input type="number" min="0" value="${taxa}"
+            onchange="atualizarTaxa(${pedidos.length - 1 - index}, this.value)">
         </div>
+
+        <div class="pedido-total">
+          💰 Total: R$${totalComEntrega}
+        </div>
+
+        <button class="excluir-btn" onclick="excluirPedido(${pedidos.length - 1 - index})">
+          ❌ Excluir pedido
+        </button>
       </div>
     `;
   });
+}
+
+function excluirPedido(index) {
+  if (!confirm("Tem certeza que deseja excluir este pedido?")) return;
+
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.splice(index, 1);
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+  carregarPedidos();
+}
+
+function atualizarTaxa(index, valor) {
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+  pedidos[index].taxaEntrega = Number(valor);
+
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+  carregarPedidos();
 }
 
 carregarPedidos();

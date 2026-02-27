@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Luiza Bazar</title>
-    <link rel="stylesheet" href="luizabazar.css"> 
+    <link rel="stylesheet" href="teste.css"> 
 </head> 
 <body>
     <header class="header"> 
@@ -13,9 +13,9 @@
             <nav class="menu">
                 <a href="index.html" class="link1">Inicio</a>
                 <a href="lojas.html" class="link1">Lojas</a> 
-                <a href="" class="link1">Promoções</a>
-                <a href="" class="link1">Contato</a> 
-                <a href="" class="link1">Sobre</a>
+                <a href="#" class="link1">Promoções</a>
+                <a href="#" class="link1">Contato</a> 
+                <a href="#" class="link1">Sobre</a>
             </nav> 
         </div> 
     </header> 
@@ -66,7 +66,7 @@
             { nome: "Jaqueta anos 80 (2)", preco: 250, imagem: "imagens/jaqueta80.jpg" },
             { nome: "Saia Pequena (2)", preco: 35, imagem: "imagens/saiasp.jpg" },
             { nome: "Blusa Jeans (2)", preco: 110, imagem: "imagens/floralvin.jpg" },
-            { nome: "Cinto Vintage (2)", preco: 60, imagem: "imagens/cinto.jpg" },
+            { nome: "Cinto Vintage (2)", preco: 60, imagem: "imagens/calcabsino.png" },
             { nome: "Óculos Retrô (2)", preco: 80, imagem: "imagens/oculos.jpg" },
 			{ nome: "Óculos Retrô (2)", preco: 80, imagem: "imagens/oculos.jpg" },
 			{ nome: "Óculos Retrô (2)", preco: 80, imagem: "imagens/oculos.jpg" },
@@ -146,23 +146,45 @@
             carregarProdutos();
         }
 
-        function comprar() {
-            if (carrinho.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-            let mensagem = `🛍️ Loja: ${nomeLoja}%0A%0AOlá, quero finalizar este pedido:%0A%0A`;
-            let total = 0;
-            carrinho.forEach(item => {
-                mensagem += `- ${item.nome}: R$${item.preco}%0A`;
-                total += item.preco;
-            });
-            mensagem += `%0A💰 Total: R$${total}`;
-            let telefone = "5541998177448";
-            window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
-        }
+   function comprar() {
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
 
-        document.addEventListener("DOMContentLoaded", carregarProdutos);
+  let total = 0;
+  let mensagem = `🛍️ Loja: ${nomeLoja}%0A`;
+  mensagem += `🧾 Pedido:%0A%0A`;
+
+  carrinho.forEach(item => {
+    mensagem += `- ${item.nome}: R$${item.preco}%0A`;
+    total += item.preco;
+  });
+
+  mensagem += `%0A💰 Total: R$${total}%0A`;
+  mensagem += `%0A📦 Pedido registrado no sistema!`;
+
+  // 🔽 SALVA O PEDIDO
+  const pedido = {
+    loja: nomeLoja,
+    data: new Date().toLocaleString("pt-BR"),
+    itens: carrinho,
+    total: total
+  };
+
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.push(pedido);
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+  // 🔽 LIMPA O CARRINHO
+  carrinho = [];
+  mostrarCarrinho();
+
+  // 🔽 ABRE O WHATSAPP PARA COBRANÇA
+  const telefone = "5541998177448"; // seu número
+  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+}
+	document.addEventListener("DOMContentLoaded", carregarProdutos);
     </script>
 </body> 
 </html>
