@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Pedidos Recebidos</title>
+<link rel="stylesheet" href="pedidos.css">
+</head>
+
+<body>
+
+<h1>📦 Pedidos Recebidos</h1>
+
+<div id="listaPedidos"></div>
+
+<script>
+function carregarPedidos() {
+  const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  const container = document.getElementById("listaPedidos");
+
+  container.innerHTML = "";
+
+  if (pedidos.length === 0) {
+    container.innerHTML = "<p class='vazio'>Nenhum pedido ainda.</p>";
+    return;
+  }
+
+  pedidos.reverse().forEach(pedido => {
+    let itensHTML = "";
+
+    pedido.itens.forEach(item => {
+      itensHTML += `<li>${item.nome} - R$${item.preco}</li>`;
+    });
+
+    container.innerHTML += `
+      <div class="pedido">
+        <div class="pedido-topo">
+          <span class="loja">🏪 ${pedido.loja}</span>
+          <span class="data">🗓️ ${pedido.data}</span>
+        </div>
+
+        <ul class="itens">${itensHTML}</ul>
+
+        <div class="pedido-total">
+          💰 Total: R$${pedido.total}
+        </div>
+      </div>
+    `;
+  });
+}
+
+carregarPedidos();
+</script>
+
+</body>
+</html>

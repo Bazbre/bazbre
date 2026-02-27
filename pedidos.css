@@ -1,0 +1,98 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  padding: 20px;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #5a3e36;
+}
+
+/* Lista de pedidos */
+#listaPedidos {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  gap: 20px;
+}
+
+/* Card do pedido */
+.pedido {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border-left: 6px solid #28a745;
+  transition: 0.3s;
+}
+
+.pedido:hover {
+  transform: scale(1.01);
+}
+
+/* Topo (loja + data) */
+.pedido-topo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.loja {
+  color: #28a745;
+}
+
+.data {
+  color: #777;
+  font-size: 0.9em;
+}
+
+/* Itens */
+.itens {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.itens li {
+  padding: 6px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+/* Total */
+.pedido-total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #5a3e36;
+  margin-top: 10px;
+}
+
+/* Mensagem vazio */
+.vazio {
+  text-align: center;
+  color: #888;
+  font-size: 1.2em;
+  margin-top: 40px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .pedido-topo {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .pedido {
+    padding: 15px;
+  }
+
+  .pedido-total {
+    text-align: left;
+  }
+}
