@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+ <html lang="pt-br"> 
+ <head>
+ <meta charset="UTF-8"> <title>Painel Administrativo</title> 
+ <link rel="stylesheet" href="admin.css"> </head>
+ <body> 
+ <h1>Gerenciar Produtos</h1> <form id="formProduto">
+ <input type="text" id="nome" placeholder="Nome do produto" required> 
+ <input type="number" id="preco" placeholder="Preço" step="0.01" required>
+ <input type="file" id="arquivoImagem" accept="image/*" required> 
+ <img id="preview" width="100" style="display:none;"> 
+ <button type="submit">Adicionar Produto</button> 
+ </form> <table id="tabelaProdutos">
+ <thead> <tr> <th>Nome</th>
+ <th>Preço</th>
+ <th>Imagem</th>
+ <th>Ações</th> </tr>
+ </thead> <tbody></tbody>
+ </table> <div class="export-buttons"> 
+ <button onclick="exportarJSON()">Exportar JSON</button> 
+ <button onclick="exportarCSV()">Exportar CSV</button> </div>
+ <script>
+let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+let imagemBase64 = "";
+
+/* =============================
+   SALVAR NO LOCALSTORAGE
+============================= */
+function salvarLocal() {
+  localStorage.setItem("produtos", JSON.stringify(produtos));
+}
+
+/* =============================
+   PREVIEW DA IMAGEM
+============================= */
+document.getElementById("arquivoImagem").addEventListener("change", function() {
+  const file = this.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    imagemBase64 = e.target.result;
+    const preview = document.getElementById("preview");
+    preview.src = imagemBase64;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+/* =============================
+   ATUALIZAR TABELA
+============================= */
+function atualizarTabela() {
+  const tbody = document.querySelector("#tabelaProdutos tbody");
+  tbody.innerHTML = "";
+
+  produtos.forEach((p, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${p.nome}</td>
+        <td>R$ ${Number(p.preco).toFixed(2)}</td>
+        <td><img src="${p.imagem}" width="50"></td>
+        <td>
+          <button onclick="remover(${i})">Remover</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  salvarLocal();
+}
+
+/* =============================
+   ADICIONAR PRODUTO
+============================= */
+document.getElementById("formProduto").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value;
+  const preco = document.getElementById("preco").value;
+
+  if (!imagemBase64) {
+    alert("Selecione uma imagem!");
+    return;
+  }
+
+  produtos.push({
+    nome,
+    preco,
+    imagem: imagemBase64
+  });
+
+  atualizarTabela();
+
+  e.target.reset();
+  document.getElementById("preview").style.display = "none";
+  imagemBase64 = "";
+});
+
+/* =============================
+   REMOVER PRODUTO
+============================= */
+function remover(i) {
+  produtos.splice(i, 1);
+  atualizarTabela();
+}
+
+/* =============================
+   EXPORTAR JSON
+============================= */
+function exportarJSON() {
+  const blob = new Blob(
+    [JSON.stringify(produtos, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "produtos.json";
+  a.click();
+}
+
+/* =============================
+   EXPORTAR CSV
+============================= */
+function exportarCSV() {
+  let csv = "nome,preco,imagem\n";
+
+  produtos.forEach(p => {
+    csv += `${p.nome},${p.preco},${p.imagem}\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "produtos.csv";
+  a.click();
+}
+
+/* =============================
+   CARREGAR PRODUTOS SALVOS
+============================= */
+document.addEventListener("DOMContentLoaded", atualizarTabela);
+</script>
+ </body> </html>
