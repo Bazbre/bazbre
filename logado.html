@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Arena de Duelo - Yu-Gi-Oh Style</title>
+    <link rel="stylesheet" href="logado.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="status-bar">
+        <div class="player-info">👤 <span id="nomeUser">JOGADOR</span>: <span id="vidaJogador">10000</span> LP</div>
+        <div id="turnoAviso">AGUARDANDO SORTEIO...</div>
+        <div class="player-info">🖥️ MÁQUINA: <span id="vidaOponente">10000</span> LP</div>
+    </div>
+
+    <div class="arena">
+        <div class="campo oponente">
+            <div class="linha suporte" id="especiaisOponente"></div> 
+            <div class="linha combate" id="monstrosOponente"></div>  
+        </div>
+
+        <div class="centro">
+            <div class="deck-area-horizontal">
+                <div class="cemiterio" id="cemiterioOponente" data-label="GY"></div>
+                <div class="monte-compra">
+                    <button id="btnComprar" onclick="comprarCarta()">DECK</button>
+                    <small id="contador-deck">0</small>
+                </div>
+                <div class="cemiterio" id="cemiterioJogador" data-label="GY"></div>
+            </div>
+        </div>
+
+        <div class="campo jogador">
+            <div class="linha combate" id="monstrosJogador"></div> 
+            <div class="linha suporte" id="especiaisJogador"></div> 
+        </div>
+
+        <div class="mao-container">
+            <div id="minhaMao" class="mao"></div>
+        </div>
+    </div>
+
+    <div id="modalRoleta" class="modal" style="display: flex;">
+        <div class="modal-content">
+            <h3>QUEM COMEÇA?</h3>
+            <div class="roleta-moldura">
+                <div id="roleta">
+                    <div class="fatia voce">VOCÊ</div>
+                    <div class="fatia maquina">MÁQUINA</div>
+                </div>
+            </div>
+            <button id="btnGirar" onclick="girarRoleta()">GIRAR</button>
+        </div>
+    </div>
+
+    <div id="modalPosicao" class="modal">
+        <div class="modal-content">
+            <h3>POSIÇÃO DE INVOCAÇÃO</h3>
+            <button class="btn-atk" onclick="definirPosicao('ataque')">ATAQUE (FRENTE)</button>
+            <button class="btn-def" onclick="definirPosicao('defesa')">DEFESA (FRENTE)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

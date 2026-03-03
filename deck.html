@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Deck - Mini Duel</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="deck.css">
+</head>
+<body>
+    <div class="deck-container">
+        <h1 id="tituloDeck">Meu Deck</h1>
+        <div class="status-bar" id="statsJogador"></div>
+        
+        <div class="deck-grid" id="listaCartas"></div>
+
+        <button class="btn-entrar" onclick="window.location.href='logado.html'">
+            IR PARA A ARENA ⚔️
+        </button>
+    </div>
+
+    <script>
+        const nome = localStorage.getItem("usuarioLogado");
+        const deck = JSON.parse(localStorage.getItem(`deck_${nome}`)) || [];
+        const nivel = localStorage.getItem(`nivel_${nome}`) || 1;
+        const moedas = localStorage.getItem(`moedas_${nome}`) || 0;
+
+        document.getElementById("tituloDeck").innerText = `Deck de ${nome}`;
+        document.getElementById("statsJogador").innerHTML = `Nível: ${nivel} | 💰 Moedas: ${moedas}`;
+
+        const container = document.getElementById("listaCartas");
+        deck.forEach(carta => {
+            const div = document.createElement("div");
+            div.className = "carta-deck";
+            
+            // Lógica para exibir ATK/DEF se for monstro
+            const infoStats = carta.tipo === 'monstro' 
+                ? `<div class="stats-mini">
+                    <span class="atk-text">⚔️ ${carta.ataque}</span>
+                    <span class="def-text">🛡️ ${carta.defesa}</span>
+                   </div>`
+                : `<div class="stats-mini"><span style="color: #666;">✨ Especial</span></div>`;
+
+            div.innerHTML = `
+                <img src="${carta.imagem}">
+                <div class="info-carta">${carta.nome}</div>
+                ${infoStats}
+            `;
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>
